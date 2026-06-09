@@ -36,13 +36,9 @@ export const initialState: FlowState = {
 export function reducer(state: FlowState, action: FlowAction): FlowState {
   switch (action.type) {
     case "OPEN_DRAWER":
-      return {
-        ...state,
-        drawerOpen: true,
-        ruleDropdownOpen: false,
-        // Seed the working copy from persisted rules (excluding the default "Padrão").
-        draftRules: state.rules.filter((r) => r.id !== "padrao").map((r) => ({ ...r })),
-      };
+      // The drawer manages newly created rules in this session; existing rules
+      // remain available in the subheader dropdown.
+      return { ...state, drawerOpen: true, ruleDropdownOpen: false, draftRules: [] };
     case "CLOSE_DRAWER":
       return { ...state, drawerOpen: false, draftRules: [] };
     case "TOGGLE_RULE_DROPDOWN":
@@ -74,10 +70,7 @@ export function reducer(state: FlowState, action: FlowAction): FlowState {
         deleteTargetId: null,
       };
     case "SAVE_DRAWER": {
-      const persisted = [
-        state.rules.find((r) => r.id === "padrao")!,
-        ...state.draftRules.map((r) => ({ ...r, draft: false })),
-      ];
+      const persisted = [...state.rules, ...state.draftRules.map((r) => ({ ...r, draft: false }))];
       const lastCreated = state.draftRules[state.draftRules.length - 1];
       return {
         ...state,
