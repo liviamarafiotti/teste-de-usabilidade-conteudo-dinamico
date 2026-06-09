@@ -1,0 +1,91 @@
+.navbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 44px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  z-index: 30;
+}
+
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  flex-shrink: 0;
+}
+
+.navbar__logo-lockup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 24px;
+}
+
+.navbar__logo-symbol {
+  width: 20px;
+  height: 24px;
+}
+
+.navbar__logo-line {
+  width: 1px;
+  height: 16px;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.navbar__logo-word {
+  width: 78px;
+  height: 16px;
+}
+
+.navbar__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1 0 0;
+  height: 44px;
+}
+
+.navbar__left,
+.navbar__right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 44px;
+}
+
+.navbar__right {
+  padding-right: 16px;
+}
+
+.navbar__divider {
+  width: 1px;
+  height: 44px;
+  background: var(--color-border);
+  flex-shrink: 0;
+}
+
+.navbar__text {
+  font-family: var(--font-nunito);
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  letter-spacing: -0.14px;
+  color: var(--color-text-high);
+  white-space: nowrap;
+}
+
+.navbar__text--bold {
+  font-weight: 700;
+}
+
+.navbar__exit {
+  font-family: var(--font-nunito);
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  letter-spacing: -0.14px;
+  color: var(--color-text-high);
+  background: none;
+  border: none;
+  padding: 0;
+  white-space: nowrap;
+}

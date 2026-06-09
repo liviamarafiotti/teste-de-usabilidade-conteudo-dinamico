@@ -1,0 +1,52 @@
+:root {
+  /* Design tokens (from Figma: -CROSS- Hiperpersonalização) */
+  --color-surface: #ffffff;
+  --color-neutral-20: #e1e4e8;
+  --color-border: #d5d8db;
+  --color-border-interactive: #9ea5ac;
+  --color-neutral-60: #97a1ac;
+  --color-text-high: #212429;
+  --color-text-low: #405466;
+  --color-primary: #11a7b6;
+  --color-primary-surface: #19c1ce;
+
+  --font-nunito: "Nunito Sans", system-ui, sans-serif;
+  --font-dm: "DM Sans", system-ui, sans-serif;
+
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+
+  --radius-sm: 2px;
+  --radius-md: 8px;
+
+  --shadow-sm: 0px 4px 12px 0px rgba(0, 34, 51, 0.14);
+  --shadow-xs: 0px 2px 6px 0px rgba(33, 36, 41, 0.1);
+  --shadow-lg: 0px 12px 24px 0px rgba(33, 36, 41, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-nunito);
+  color: var(--color-text-high);
+  background: #f3f4f6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+img {
+  display: block;
+}
