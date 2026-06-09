@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - cursor/dynamic-content-flow-f3dc
   workflow_dispatch:
 
 # Allow the GITHUB_TOKEN to deploy to GitHub Pages.
