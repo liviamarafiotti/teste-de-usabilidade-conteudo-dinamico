@@ -1,4 +1,5 @@
 import { useFlow, useFlowDispatch } from "../../flow/FlowContext";
+import { asset } from "../../lib/asset";
 import { cn } from "../../lib/cn";
 import Icon from "../ui/Icon";
 
@@ -14,7 +15,7 @@ export default function Preview() {
   return (
     <div className="absolute inset-0 z-[1] overflow-hidden">
       <img
-        src="/assets/preview.png"
+        src={asset("assets/preview.png")}
         alt="Pré-visualização da landing page"
         className="pointer-events-none absolute left-[-80px] top-[110px] h-[976px] w-[1912px] max-w-none object-cover"
       />
