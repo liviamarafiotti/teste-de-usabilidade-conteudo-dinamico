@@ -18,9 +18,9 @@ const OPERATOR_OPTIONS = [
   { value: "termina", label: "Termina com" },
 ];
 
-export default function RuleAccordion({ rule }: { rule: Rule }) {
+export default function RuleAccordion({ rule, defaultExpanded = true }: { rule: Rule; defaultExpanded?: boolean }) {
   const dispatch = useFlowDispatch();
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(defaultExpanded);
   const [editingName, setEditingName] = useState(false);
 
   const placeholder = rule.condition.operator === "igual" ? "http://www.meusite.com.br/" : "palavra-chave ou domínio";

@@ -3,11 +3,16 @@ import Button from "../ui/Button";
 import Drawer from "../ui/Drawer";
 import Icon from "../ui/Icon";
 import Message from "../ui/Message";
+import Tooltip from "../ui/Tooltip";
 import RuleAccordion from "./RuleAccordion";
+
+/** Business rule: at most 5 rules can be created. */
+const RULE_LIMIT = 5;
 
 export default function DynamicContentDrawer() {
   const { draftRules } = useFlow();
   const dispatch = useFlowDispatch();
+  const limitReached = draftRules.length >= RULE_LIMIT;
 
   return (
     <Drawer
@@ -38,14 +43,21 @@ export default function DynamicContentDrawer() {
           Landing Page será a mesma em todas as versões.
         </Message>
 
-        <Button
-          variant="link"
-          className="self-start px-3"
-          leftIcon={<Icon name="plus" size={24} />}
-          onClick={() => dispatch({ type: "ADD_DRAFT_RULE" })}
+        <Tooltip
+          className="self-start"
+          text="Você atingiu o limite de regras criadas."
+          enabled={limitReached}
         >
-          Criar regra
-        </Button>
+          <Button
+            variant="link"
+            className="px-3"
+            leftIcon={<Icon name="plus" size={24} />}
+            disabled={limitReached}
+            onClick={() => dispatch({ type: "ADD_DRAFT_RULE" })}
+          >
+            Criar regra
+          </Button>
+        </Tooltip>
 
         {draftRules.length > 0 && (
           <div className="flex flex-col">
@@ -53,7 +65,8 @@ export default function DynamicContentDrawer() {
               <div className="h-px w-full bg-border" />
             </div>
             {draftRules.map((rule) => (
-              <RuleAccordion key={rule.id} rule={rule} />
+              // Saved rules load collapsed; a freshly created rule opens expanded.
+              <RuleAccordion key={rule.id} rule={rule} defaultExpanded={!!rule.draft} />
             ))}
           </div>
         )}
