@@ -20,10 +20,9 @@ function newRule(): Rule {
 
 export const initialState: FlowState = {
   drawerOpen: false,
-  rules: [
-    { id: "padrao", name: "Padrão", category: null, condition: { operator: "igual", value: "" } },
-    { id: "regra-xyz", name: "Regra xyz", category: "fonte", condition: { operator: "igual", value: "" } },
-  ],
+  // Frame 1 starts with no custom rules: the subheader selector shows only the
+  // "Criar regra" action. Rules are added as the user creates them.
+  rules: [],
   draftRules: [],
   ruleDropdownOpen: false,
   activeRuleId: null,

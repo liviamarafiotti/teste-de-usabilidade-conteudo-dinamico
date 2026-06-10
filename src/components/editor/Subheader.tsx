@@ -52,29 +52,41 @@ export default function Subheader() {
           <Dropdown
             open={ruleDropdownOpen}
             onClose={() => dispatch({ type: "TOGGLE_RULE_DROPDOWN", open: false })}
+            className="w-[205px]"
             style={{ top: "calc(100% + 6px)", left: 0 }}
           >
-            <div className="px-2 pb-2">
-              <button
-                type="button"
+            {/* Rule preview options appear once rules exist */}
+            {rules.length > 0 && (
+              <div className="pb-2">
+                <DropdownItem bold active={activeRuleId === "padrao"} onClick={() => dispatch({ type: "SET_ACTIVE_RULE", id: "padrao" })}>
+                  Padrão
+                </DropdownItem>
+                {rules.map((rule) => (
+                  <DropdownItem
+                    key={rule.id}
+                    bold
+                    active={rule.id === activeRuleId}
+                    onClick={() => dispatch({ type: "SET_ACTIVE_RULE", id: rule.id })}
+                  >
+                    {rule.name}
+                  </DropdownItem>
+                ))}
+                <div className="mt-2 h-px bg-border" />
+              </div>
+            )}
+
+            {/* Footer action: Criar regra -> opens the Conteúdo dinâmico drawer */}
+            <div className="px-4">
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-full"
+                leftIcon={<Icon name="plus" size={20} />}
                 onClick={() => dispatch({ type: "OPEN_DRAWER" })}
-                className="flex w-full items-center justify-center gap-2 rounded-md py-1.5 font-dm text-[14px] font-bold tracking-[-0.14px] text-primary-70 transition-colors hover:bg-primary-70/5"
               >
-                <Icon name="pen" size={18} />
-                Editar regras
-              </button>
+                Criar regra
+              </Button>
             </div>
-            <div className="h-px bg-border" />
-            {rules.map((rule) => (
-              <DropdownItem
-                key={rule.id}
-                bold
-                active={rule.id === activeRuleId}
-                onClick={() => dispatch({ type: "SET_ACTIVE_RULE", id: rule.id })}
-              >
-                {rule.name}
-              </DropdownItem>
-            ))}
           </Dropdown>
         </div>
 

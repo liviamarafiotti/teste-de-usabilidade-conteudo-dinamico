@@ -30,7 +30,7 @@ export default function Dropdown({ open, onClose, children, className, style }: 
       ref={ref}
       style={style}
       className={cn(
-        "absolute z-50 min-w-[205px] animate-fade-in overflow-hidden rounded-md border border-border bg-white py-2 shadow-popover",
+        "absolute z-50 min-w-[205px] animate-fade-in overflow-hidden rounded-sm border border-border bg-white py-2 shadow-nav",
         className
       )}
     >
