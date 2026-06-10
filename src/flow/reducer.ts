@@ -35,9 +35,14 @@ export const initialState: FlowState = {
 export function reducer(state: FlowState, action: FlowAction): FlowState {
   switch (action.type) {
     case "OPEN_DRAWER":
-      // The drawer manages newly created rules in this session; existing rules
-      // remain available in the subheader dropdown.
-      return { ...state, drawerOpen: true, ruleDropdownOpen: false, draftRules: [] };
+      // Load already-saved rules into the drawer (shown collapsed) so they can
+      // be reviewed/edited alongside any new rule created in this session.
+      return {
+        ...state,
+        drawerOpen: true,
+        ruleDropdownOpen: false,
+        draftRules: state.rules.map((r) => ({ ...r, draft: false })),
+      };
     case "CLOSE_DRAWER":
       return { ...state, drawerOpen: false, draftRules: [] };
     case "TOGGLE_RULE_DROPDOWN":
@@ -69,14 +74,17 @@ export function reducer(state: FlowState, action: FlowAction): FlowState {
         deleteTargetId: null,
       };
     case "SAVE_DRAWER": {
-      const persisted = [...state.rules, ...state.draftRules.map((r) => ({ ...r, draft: false }))];
-      const lastCreated = state.draftRules[state.draftRules.length - 1];
+      // draftRules already contains existing rules (loaded on open) plus any
+      // newly created ones, so persist the edited list as-is.
+      const persisted = state.draftRules.map((r) => ({ ...r, draft: false }));
+      const newlyCreated = state.draftRules.filter((r) => r.draft);
+      const lastNew = newlyCreated[newlyCreated.length - 1];
       return {
         ...state,
         rules: persisted,
         drawerOpen: false,
         draftRules: [],
-        activeRuleId: lastCreated ? lastCreated.id : state.activeRuleId,
+        activeRuleId: lastNew ? lastNew.id : state.activeRuleId,
         toast: {
           title: "As alterações foram salvas!",
           description: "Use o conteúdo dinâmico nos componentes da Landing Page.",

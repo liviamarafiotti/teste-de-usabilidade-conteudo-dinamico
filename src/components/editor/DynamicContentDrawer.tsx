@@ -53,7 +53,8 @@ export default function DynamicContentDrawer() {
               <div className="h-px w-full bg-border" />
             </div>
             {draftRules.map((rule) => (
-              <RuleAccordion key={rule.id} rule={rule} />
+              // Saved rules load collapsed; a freshly created rule opens expanded.
+              <RuleAccordion key={rule.id} rule={rule} defaultExpanded={!!rule.draft} />
             ))}
           </div>
         )}
